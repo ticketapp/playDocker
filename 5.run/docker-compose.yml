@@ -1,0 +1,22 @@
+5.run:
+  image: 5.run
+  ports:
+    - "88:88"
+  links:
+    - dbHost
+
+dbHost:
+  image: my_postgres
+  ports:
+    - "5433:5433"
+  expose:
+    - "5433"
+#  environment:
+#    POSTGRES_USER: simon
+#    POSTGRES_PASSWORD: root
+#    POSTGRES_DB: ticketapp
+
+
+
+#   extra_hosts:
+#      dbHost: 127.0.0.1

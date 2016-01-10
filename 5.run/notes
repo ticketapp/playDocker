@@ -1,0 +1,18 @@
+app-secret
+password postgres
+
+
+
+
+if no other solution --> create extension and commit ?
+
+
+
+change application.prod.conf to change port to 5433
+
+
+
+
+polo : 80
+j.e. : 20
+slims etc
