@@ -27,3 +27,33 @@ RUN \
     rm -rf /var/cache/oracle-jdk8-installer  && \
     apt-get clean  && \
     rm -rf /var/lib/apt/lists/*
+
+
+ENV SCALA_VERSION 2.11.7
+ENV SBT_VERSION 0.13.9
+
+
+# Install Scala
+RUN \
+  cd /root && \
+  curl -o scala-$SCALA_VERSION.tgz http://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz && \
+  tar -xf scala-$SCALA_VERSION.tgz && \
+  rm scala-$SCALA_VERSION.tgz && \
+  echo >> /root/.bashrc && \
+  echo 'export PATH=~/scala-$SCALA_VERSION/bin:$PATH' >> /root/.bashrc
+
+
+# Install sbt
+RUN \
+    echo "deb http://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823 && \
+    apt-get update -y && \
+    apt-get install -y sbt
+
+#Get the last version of sbt to avoid it to be redownloaded each time
+RUN \
+    sbt
+
+RUN apt-get install -y git
+
+RUN apt-get install -y unzip
